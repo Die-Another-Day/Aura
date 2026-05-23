@@ -1,0 +1,68 @@
+[
+  {
+    "role": "user",
+    "content": "open youtube",
+    "timestamp": 1779503693449
+  },
+  {
+    "role": "assistant",
+    "content": "Opening YouTube for you.",
+    "timestamp": 1779503695097,
+    "source": "command"
+  },
+  {
+    "role": "user",
+    "content": "Clay",
+    "timestamp": 1779503716337
+  },
+  {
+    "role": "assistant",
+    "content": "Could you please clarify what you'd like me to do with \"Clay\"? I'm not sure what application or information you're referring to.",
+    "timestamp": 1779503720919,
+    "source": "gemini"
+  },
+  {
+    "role": "user",
+    "content": "Play",
+    "timestamp": 1779503731367
+  },
+  {
+    "role": "assistant",
+    "content": "Playing music on YouTube.",
+    "timestamp": 1779503732329,
+    "source": "command"
+  },
+  {
+    "role": "user",
+    "content": "play bairan",
+    "timestamp": 1779503739971
+  },
+  {
+    "role": "assistant",
+    "content": "Playing bairan on Spotify.",
+    "timestamp": 1779503741134,
+    "source": "command"
+  },
+  {
+    "role": "user",
+    "content": "play bairan on yuotube",
+    "timestamp": 1779503751860
+  },
+  {
+    "role": "assistant",
+    "content": "Playing bairan on yuotube on Spotify.",
+    "timestamp": 1779503753347,
+    "source": "command"
+  },
+  {
+    "role": "user",
+    "content": "play bairan on youtube",
+    "timestamp": 1779503773647
+  },
+  {
+    "role": "assistant",
+    "content": "Playing bairan on YouTube.",
+    "timestamp": 1779503775827,
+    "source": "command"
+  }
+]
