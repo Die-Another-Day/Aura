@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AURA — AI Voice Assistant powered by Google Gemini" />
+  <title>AURA | AI Voice Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <!-- Ambient background effects -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header glass">
+      <div class="header__brand">
+        <div class="logo" aria-hidden="true">
+          <span class="logo__ring"></span>
+          <span class="logo__core"></span>
+        </div>
+        <div>
+          <h1 class="header__title">AURA</h1>
+          <p class="header__subtitle">AI Voice Assistant</p>
+        </div>
+      </div>
+      <div class="header__actions">
+        <span class="status-badge" id="statusBadge" title="Connection status">
+          <span class="status-badge__dot"></span>
+          <span id="statusText">Connecting...</span>
+        </span>
+        <button type="button" class="btn btn--ghost" id="clearChatBtn" title="Clear chat history">
+          Clear
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat area -->
+    <main class="chat glass" id="chatContainer" role="log" aria-live="polite" aria-label="Chat messages">
+      <div class="welcome" id="welcomeMessage">
+        <p class="welcome__greeting">Hello, I'm <strong>AURA</strong></p>
+        <p class="welcome__hint">Tap the microphone or type a message. While AURA is speaking, use the <strong>red stop</strong> button or <strong>Esc</strong>, then talk again. Try:</p>
+        <ul class="welcome__commands">
+          <li>"Play song Blinding Lights"</li>
+          <li>"Can you play Despacito"</li>
+          <li>"What's the time?"</li>
+          <li>"What's the weather in London?"</li>
+          <li>"Tell me about black holes"</li>
+        </ul>
+      </div>
+    </main>
+
+    <!-- Loading overlay -->
+    <div class="loader hidden" id="loader" role="status" aria-label="Loading">
+      <div class="loader__spinner"></div>
+      <p class="loader__text">AURA is thinking...</p>
+    </div>
+
+    <!-- Input bar -->
+    <footer class="input-bar glass">
+      <form class="input-form" id="chatForm" autocomplete="off">
+        <input
+          type="text"
+          class="input-form__field"
+          id="messageInput"
+          placeholder="Type a message or use voice..."
+          aria-label="Message input"
+        />
+        <button type="submit" class="btn btn--send" id="sendBtn" aria-label="Send message">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </form>
+
+      <button
+        type="button"
+        class="stop-speech-btn hidden"
+        id="stopSpeechBtn"
+        aria-label="Stop speaking"
+        title="Stop voice output (Esc)"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+          <path d="M6 6h12v12H6z"/>
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="mic-btn"
+        id="micBtn"
+        aria-label="Start voice input"
+        aria-pressed="false"
+        title="Voice input (stops speech first if playing)"
+      >
+        <span class="mic-btn__rings" aria-hidden="true">
+          <span class="mic-btn__ring"></span>
+          <span class="mic-btn__ring"></span>
+          <span class="mic-btn__ring"></span>
+        </span>
+        <svg class="mic-btn__icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-container" id="toastContainer" role="alert" aria-live="assertive"></div>
+
+  <script src="{{ url_for('static', filename='script.js') }}?v=5"></script>
+</body>
+</html>

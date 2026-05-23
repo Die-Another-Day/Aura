@@ -1,0 +1,18 @@
+# Web framework
+Flask==3.1.0
+flask-cors==5.0.1
+
+# Environment & HTTP
+python-dotenv==1.1.0
+requests==2.32.3
+
+# Google Gemini AI
+google-generativeai==0.8.4
+
+# Speech: STT & TTS
+SpeechRecognition==3.14.1
+pyttsx3==2.98
+
+# Optional: server microphone (often needs MSVC Build Tools on Windows).
+# pip install PyAudio
+# Or: pip install pipwin && pipwin install pyaudio
