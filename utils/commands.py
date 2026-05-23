@@ -6,7 +6,7 @@ import urllib.request
 import webbrowser
 from datetime import datetime
 from urllib.parse import quote_plus
-import pyautogui
+# import pyautogui
 import requests
 
 # Command patterns: (regex, handler_name)
@@ -142,13 +142,24 @@ def _open_spotify_smart(song: str):
             
         # 2. WAIT 5 SECONDS
         time.sleep(15) 
-        
+
+      
+        song = "Blinding Lights"
+
+        query = quote_plus(song)
+        spotify_url = f"https://open.spotify.com/search/{query}"
+
+        return {
+            "mode": "web",
+            "url": spotify_url
+        }
+
         # 3. Simulate pressing Tab and Enter
-        pyautogui.press('tab')
-        time.sleep(0.5)
-        pyautogui.press('enter')
+      #  pyautogui.press('tab')
+        # time.sleep(0.5)
+        #pyautogui.press('enter')
         
-        return {"mode": "app", "url": spotify_uri}
+       # return {"mode": "app", "url": spotify_uri}
     
     webbrowser.open(url)
     return {"mode": "web", "url": url}
