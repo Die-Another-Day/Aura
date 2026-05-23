@@ -16,3 +16,5 @@ pyttsx3==2.98
 # Optional: server microphone (often needs MSVC Build Tools on Windows).
 # pip install PyAudio
 # Or: pip install pipwin && pipwin install pyaudio
+
+pyautogui
