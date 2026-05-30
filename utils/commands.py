@@ -13,6 +13,7 @@ import requests
 COMMAND_PATTERNS: list[tuple[str, str]] = [
     (r"\b(open|launch|go to)\s+youtube\b", "open_youtube"),
     (r"\b(open|launch|go to)\s+google\b", "open_google"),
+    (r"\b(open|launch|go to)\s+google\b", "open_insta"),
     (r"\b(what('s| is) the )?time\b|\btell me the time\b|\bcurrent time\b", "tell_time"),
     (r"\b(what('s| is) the )?date\b|\btell me the date\b|\btoday('s)? date\b", "tell_date"),
     (r"\bweather\b|\bforecast\b|\btemperature\b", "tell_weather"),
@@ -38,6 +39,7 @@ def execute_command(handler_name: str, user_text: str) -> dict:
     handlers = {
         "open_youtube": _open_youtube,
         "open_google": _open_google,
+        "open_insta": _open_insta_,
         "tell_time": _tell_time,
         "tell_date": _tell_date,
         "tell_weather": _tell_weather,
@@ -51,7 +53,8 @@ def execute_command(handler_name: str, user_text: str) -> dict:
 
 def _open_youtube(_user_text: str) -> dict:
     return {"response": "Opening YouTube for you.", "action": "open_url", "url": "https://www.youtube.com"}
-
+def _open_insta_(_user_text: str) -> dict:
+    return {"response": "Opening YouTube for you.", "action": "open_url", "url": "https://instagram.com"}
 def _open_google(_user_text: str) -> dict:
     return {"response": "Opening Google.", "action": "open_url", "url": "https://www.google.com"}
 
