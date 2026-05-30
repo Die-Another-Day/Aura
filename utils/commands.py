@@ -13,7 +13,13 @@ import requests
 COMMAND_PATTERNS: list[tuple[str, str]] = [
     (r"\b(open|launch|go to)\s+youtube\b", "open_youtube"),
     (r"\b(open|launch|go to)\s+google\b", "open_google"),
-    (r"\b(open|launch|go to)\s+google\b", "open_insta"),
+    (r"\b(open|launch|go to)\s+instagram\b", "open_insta"),
+    (r"\b(search|find)\s+instagram\s+(for\s+)?(.+)", "search_insta"),
+    (r"\b(open)\s+instagram\s+profile\s+(.+)", "open_insta_profile"),
+    (r"\b(open)\s+reels\b", "open_reels"),
+    (r"\b(open)\s+instagram\s+reels\b", "open_reels"),
+    (r"\b(open)\s+messages\b", "open_messages"),
+    (r"\b(open)\s+instagram\s+messages\b", "open_messages"),
     (r"\b(what('s| is) the )?time\b|\btell me the time\b|\bcurrent time\b", "tell_time"),
     (r"\b(what('s| is) the )?date\b|\btell me the date\b|\btoday('s)? date\b", "tell_date"),
     (r"\bweather\b|\bforecast\b|\btemperature\b", "tell_weather"),
@@ -37,6 +43,10 @@ def detect_command(user_text: str) -> str | None:
 
 def execute_command(handler_name: str, user_text: str) -> dict:
     handlers = {
+        "search_insta": _search_insta,
+        "open_insta_profile": _open_insta_profile,
+        "open_reels": _open_reels,
+        "open_messages": _open_messages,
         "open_youtube": _open_youtube,
         "open_google": _open_google,
         "open_insta": _open_insta_,
@@ -54,7 +64,67 @@ def execute_command(handler_name: str, user_text: str) -> dict:
 def _open_youtube(_user_text: str) -> dict:
     return {"response": "Opening YouTube for you.", "action": "open_url", "url": "https://www.youtube.com"}
 def _open_insta_(_user_text: str) -> dict:
-    return {"response": "Opening YouTube for you.", "action": "open_url", "url": "https://instagram.com"}
+    return {
+        "response": "Opening Instagram.",
+        "action": "open_url",
+        "url": "https://www.instagram.com"
+    }
+def _search_insta(user_text: str) -> dict:
+    username = re.sub(
+        r".*?(search|find)\s+instagram\s+(for\s+)?",
+        "",
+        user_text,
+        flags=re.IGNORECASE
+    ).strip()
+
+    url = (
+        "https://www.instagram.com/explore/search/keyword/?q="
+        + quote_plus(username)
+    )
+
+    return {
+        "response": f"Searching Instagram for {username}",
+        "action": "open_url",
+        "url": url,
+    }
+
+
+def _open_insta_profile(user_text: str) -> dict:
+    match = re.search(
+        r"open\s+instagram\s+profile\s+(.+)",
+        user_text,
+        re.IGNORECASE,
+    )
+
+    if not match:
+        return {
+            "response": "Please tell me the profile name.",
+            "action": "error",
+        }
+
+    username = match.group(1).strip().replace("@", "")
+
+    return {
+        "response": f"Opening Instagram profile {username}",
+        "action": "open_url",
+        "url": f"https://www.instagram.com/{username}/",
+    }
+
+
+def _open_reels(_user_text: str) -> dict:
+    return {
+        "response": "Opening Instagram Reels.",
+        "action": "open_url",
+        "url": "https://www.instagram.com/reels/",
+    }
+
+
+def _open_messages(_user_text: str) -> dict:
+    return {
+        "response": "Opening Instagram Messages.",
+        "action": "open_url",
+        "url": "https://www.instagram.com/direct/inbox/",
+    }
 def _open_google(_user_text: str) -> dict:
     return {"response": "Opening Google.", "action": "open_url", "url": "https://www.google.com"}
 
